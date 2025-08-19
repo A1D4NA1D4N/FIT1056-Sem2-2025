@@ -71,6 +71,63 @@ def update_teacher(teacher_id, **fields):
             return
     print(f"Error: Teacher with ID {teacher_id} not found.")
 
+
+def find_students(term):
+    """Finds students by name."""
+    print(f"\n--- Finding Students matching '{term}' ---")
+    # TODO: Create an empty list to store results.
+    # Loop through student_db. If the search 'term' (case-insensitive) is in the student's name,
+    # add them to your results list.
+    # After the loop, if the results list is empty, print "No match found."
+    # Otherwise, print the details for each student in the results list.
+
+
+
+    matching = []
+
+    for student in student_db:
+        if term in student.name:
+            matching.append(student)
+            for student in matching:
+                print(f"  ID: {student.id}, Name: {student.name}, Enrolled in: {student.enrolled_in}")
+                matching = [] # Reset the list to empty for future searches
+    else:
+        print("No match found")
+
+
+
+
+def find_teachers(term):
+    """Finds teachers by name or speciality."""
+    # TODO: Implement this function similar to find_students, but check
+    # for the term in BOTH the teacher's name AND their speciality.
+
+
+
+    matching = []
+    matching_specialty = []
+
+    for teacher in teacher_db:
+        if term in teacher.name:
+            matching.append(teacher)
+            for teacher in matching:
+                print(f"  ID: {teacher.id}, Name: {teacher.name}, Enrolled in: {teacher.enrolled_in}")
+                matching = [] # Reset the list to empty for future searches
+    else:
+        print("No match found for names")
+
+
+    for teacher in teacher_db: # Seperates the output to specify the search attribute used
+        if term in teacher.speciality:
+            matching_specialty.append(teacher)
+            for teacher in matching:
+                print("Matches found for specialty \n", f"  ID: {teacher.id}, Name: {teacher.name}, Enrolled in: {teacher.enrolled_in}")
+                matching_specialty = [] # Reset the list to empty for future searches
+    else:
+        print("No match found for specialty")
+
+        
+
 def remove_student(student_id):
     """Removes a student from the data store."""
     # TODO: Find the student dictionary in app_data['students'] with the matching ID.
@@ -203,6 +260,11 @@ def main():
         elif choice == '4':
             # TODO: Get student_id, then call remove_student().
             made_change = True
+        elif choice == '6': # added lines for search functions using "6" and "7" inputs
+            search_term = input("Search for Student: ")
+            find_students(search_term)
+        elif choice == '7':
+            search_term = input("Search for Teacher: ")
         elif choice.lower() == 'q':
             print("Saving final changes and exiting.")
             break
