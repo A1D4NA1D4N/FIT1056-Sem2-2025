@@ -72,6 +72,28 @@ def update_teacher(teacher_id, **fields):
     print(f"Error: Teacher with ID {teacher_id} not found.")
 
 
+
+
+def list_students():
+    """Prints all students in the database."""
+    print("\n--- Student List ---")
+    if not student_db:
+        print("No students in the system.")
+        return
+    # TODO: Loop through student_db. For each student, print their ID, name, and their enrolled_in list.
+    for student in student_db:
+        print(f"  ID: {student.id}, Name: {student.name}, Enrolled in: {student.enrolled_in}")
+
+def list_teachers():
+    """Prints all teachers in the database."""
+    # TODO: Implement the logic to list all teachers, similar to list_students().
+    print("\n--- Teacher List ---")
+    for teacher in teacher_db:
+        print(f"  ID: {teacher.id}, Name: {teacher.name}, Speciality: {teacher.speciality}")
+
+
+
+
 def find_students(term):
     """Finds students by name."""
     print(f"\n--- Finding Students matching '{term}' ---")
@@ -126,7 +148,7 @@ def find_teachers(term):
     else:
         print("No match found for specialty")
 
-        
+
 
 def remove_student(student_id):
     """Removes a student from the data store."""
@@ -225,6 +247,7 @@ def print_student_card(student_id):
         print("Current enrolled students:\n")
         for student in app_data['students']:
             print(student)
+        print("please ensure the student is within the enorlled list")
 
 
 
@@ -265,6 +288,10 @@ def main():
             find_students(search_term)
         elif choice == '7':
             search_term = input("Search for Teacher: ")
+        elif choice =='8':
+            list_students
+        elif choice =='9':
+            list_teachers
         elif choice.lower() == 'q':
             print("Saving final changes and exiting.")
             break
